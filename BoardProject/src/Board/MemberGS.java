@@ -6,39 +6,53 @@ public class MemberGS {
 
 
 	// 회원가입
-	private String Lgid;
-	private String Lgpw;
-	private String Lgname;
-	private String Lgbirth;
+	private String Memid;
+	private String Mempw;
+	private String Memname;
+	private int Membirth;
 	
 	
 	
-	public String getLgid() {
-		return Lgid;
-	}
-	public void setLgid(String lgid) {
-		Lgid = lgid;
-	}
-	public String getLgpw() {
-		return Lgpw;
-	}
-	public void setLgpw(String lgpw) {
-		Lgpw = lgpw;
-	}
-	public String getLgname() {
-		return Lgname;
-	}
-	public void setLgname(String lgname) {
-		Lgname = lgname;
-	}
-	public String getLgbirth() {
-		return Lgbirth;
-	}
-	public void setLgbirth(String lgbirth) {
-		Lgbirth = lgbirth;
+	public String getMemid() {
+		return Memid;
 	}
 	
+	public void setMemid(String memid) {
+		Memid = memid;
+	}
+	public String getMempw() {
+		return Mempw;
+	}
+	public void setMempw(String mempw) {
+		Mempw = mempw;
+	}
+	public String getMemname() {
+		return Memname;
+	}
+	public void setMemname(String memname) {
+		Memname = memname;
+	}
+	public int getMembirth() {
+		return Membirth;
+	}
+	public void setMembirth(int membirth) {
+		Membirth = membirth;
+	}
+	
+	public String toFindID() {
+		return String.format("%-10s",Memid);
+	}
 
+	public String toFindPW() {
+		return String.format("%-10s",Mempw);
+	}
+
+
+	@Override
+	public String toString() {
+		return "MemberGS [Memid=" + Memid + ", Mempw=" + Mempw + ", Memname=" + Memname + ", Membirth=" + Membirth
+				+ "]";
+	}
 	
 
 	
