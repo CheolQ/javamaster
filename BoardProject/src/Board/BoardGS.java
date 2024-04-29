@@ -44,11 +44,29 @@ public class BoardGS {
 	
 	@Override
 	public String toString() {
-		return String.format("%-4d %-6s %-5s %-20s %-4s", Brno, Brtitle, Brname, Brcontent, Brdate);
+		
+		String gaptitle = Brtitle, gapname=Brname, gapcon = Brcontent;
+		
+//		if(Brname.length()<10) {	//이름 크기 제한
+//			for(int i=0; i<9-Brname.length(); i++)
+//			{gapname = " ";}
+//		} else {gapname = Brname.substring(0,9)+" ";}
+		
+		if(Brtitle.length()<7) {	//제목 크기 제한
+			for(int i=0; i<7-Brtitle.length(); i++)
+			{gaptitle+= " ";}
+		} else {gaptitle = Brtitle.substring(0,6)+"..";}
+		
+		if(Brcontent.length()<14) {	//내용 크기 제한
+			for(int i=0; i<14-Brcontent.length(); i++)
+			{gapcon+= " ";}
+		} else {gapcon = Brcontent.substring(0,9)+"...";}
+		
+		return String.format("┃ %-3d┃  %-4s ┃ %-3s ┃ %4s ┃ %s ┃", Brno, Brname, gaptitle, gapcon, Brdate);
 //		return String.format("%-4d %-6s %-5s %15s %s", Brno, Brtitle, Brname, Brcontent, Brdate);
 	}
 	public String showDetail() {
-		return String.format("제목  : %-5s\n작성자 : %-5s\n내용  :%15s\n작성일 : %s", 
+		return String.format("Title   : %-5s\nWriter  : %-5s\nContent : %5s\nTime    : %s", 
 								Brtitle, Brname, Brcontent, Brdate);
 	}
 	

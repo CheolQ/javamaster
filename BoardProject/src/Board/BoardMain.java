@@ -18,12 +18,17 @@ public class BoardMain {
 		MemberDao dao1 = new MemberDao();
 
 		while (run) { // 로그인 while문
-			System.out.println("=========================== Login ============================");
-			System.out.println("   1.로그인     2.회원가입     3.아이디찾기     4.비밀번호찾기     5.종료");
-			System.out.println("==============================================================");
-			System.out.print("선택>> ");
-			int login = Integer.parseInt(sc.nextLine());
-
+			System.out.println("╔══════════════════════════ °LOGIN° ════════════════════════════╗ ");
+			System.out.println("║   1.Login    2.Sign up   3.Forgot ID   4.Forgot PW    5.End   ║ ");
+			System.out.println("╚═══════════════════════════════════════════════════════════════╝ ");
+			System.out.print("Choice ➤ ");
+//			int login = Integer.parseInt(sc.nextLine());
+			   int login = 0;
+		         try {
+		         login = Integer.parseInt(sc.nextLine());
+		         }catch(NumberFormatException e) {
+		            System.out.println("숫자 1~5번을 입력해주세요");
+		         }
 			switch (login) { // 로그인 switch
 
 			case 1: // 게시판 로그인
@@ -36,61 +41,79 @@ public class BoardMain {
 				System.out.print("Password: ");
 				String pw = sc.nextLine();
 				if(mdao.login(id, pw)) {
-					System.out.println("-------------------- 로그인 성공하였습니다 ╭◉␣◉╮ --------------------");
+					System.out.println("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+					System.out.println("┃        　            Login Success. ╭◉␣◉╮                       ┃");
+					System.out.println("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 					run2 = true;
 				}else {
-					System.out.println("-------------------- 로그인 실패하였습니다 ╭◉␣◉╮ --------------------");
+					System.out.println("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");	
+					System.out.println("┃                     Login Failed ( ˙ỏ˙ )？╮    　  　            ┃");
+					System.out.println("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 				run2 = false;
 				}
 //				user.setMempw(pw);
 				System.out.println("");
 
 				while (run2) { // 게시판 while문
-					System.out.println("=========================== MENU =============================");
-					System.out.println(" 1.글작성  2.목록보기  3.상세보기  4.수정하기  5.삭제하기  6.뒤로가기  7.종료 ");
-					System.out.println("==============================================================");
+					System.out.println("╔═══════════════════════════ MENU ══════════════════════════════╗");
+					System.out.println("║   1.Write  2.List  3.View  4.Modify  5.Delete  6.Back  7.End  ║");
+					System.out.println("╚═══════════════════════════════════════════════════════════════╝");
 					System.out.print("선택>> ");
-					int menu = Integer.parseInt(sc.nextLine());
-
+//					int menu = Integer.parseInt(sc.nextLine());
+					int menu = 0;
+					try {
+				         menu = Integer.parseInt(sc.nextLine());
+				         }catch(NumberFormatException e) {
+				            System.out.println("숫자 1~7번을 입력해주세요");
+				         }
 					switch (menu) { // 게시판 switch문
 
 					case 1: // 게시판 글 작성 기능
-						System.out.println("--------------------------- 글작성 ------------------------------");
-						System.out.print("제목   >> ");
+						System.out.println("╔═══════════════════════════════════════════════════════════════╗");
+						System.out.println("║                          Writing                              ║");
+						System.out.println("╚═══════════════════════════════════════════════════════════════╝");
+						System.out.print("Title     >> ");
 						String title = sc.nextLine();
 
-						System.out.print("작성자  >> ");
+						System.out.print("Writer    >> ");
 						String name = sc.nextLine();
 
-						System.out.print("내용   >> ");
+						System.out.print("Content   >> ");
 						String content = sc.nextLine();
 
 						BoardGS Board = new BoardGS();
 						Board.setBrtitle(title);
-						Board.setBrname(name);
+						Board.setBrname(name);						
 						Board.setBrcontent(content);
 
 						if (dao.insertBoard(Board)) {
-							System.out.println("--------------------- 작성이 완료되었습니다 ᴖ ᴈ ᴖ -------------------");
+							System.out.println("╔═══════════════════════════════════════════════════════════════╗");
+							System.out.println("║                       Write Success                           ║");
+							System.out.println("╚═══════════════════════════════════════════════════════════════╝");
 							System.out.println("");
 						} else {
-							System.out.println("--------------------- 작성 실패했어요 ̗̀(ꀬ⏖ꀬ∴) ---------------------");
+							System.out.println("╔═══════════════════════════════════════════════════════════════╗");
+							System.out.println("║                      Writeing Fail ` ̗̀(ꀬ⏖ꀬ∴)              　   ║");
+						    System.out.println("╚═══════════════════════════════════════════════════════════════╝");
 							System.out.println("");
 						}
 						break;
 
 					case 2: // 게시판 목록보기 기능
 						List<BoardGS> Boards = dao.BoardList();
-						System.out.println("------------------------- 게시판 목록 ---------------------------");
-						System.out.println("--------------------------------------------------------------");
+						System.out.println("");
+						System.out.println("╔═══════════════════════════════════════════════════════════════╗");
+						System.out.println("║                            List                               ║");
+						System.out.println("╚═══════════════════════════════════════════════════════════════╝");
 
 						// 타이틀.
-						System.out.println("번호 |  제목  | 작성자 |      내용             |       작성시간     ");
-						System.out.println("--------------------------------------------------------------");
+						System.out.println("┏━━━━┳━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━┓");
+						System.out.println("┃ No ┃ Writer ┃  Title   ┃     Content      ┃       time         ┃");
+						System.out.println("┣━━━━╋━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━┫");
 						for (BoardGS Board1 : Boards) {
 							System.out.println(Board1.toString());
 						}
-					    System.out.println("--------------------------------------------------------------");
+					    System.out.println("┗━━━━┻━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━┛");
 					    System.out.println("");
 						break;
 
@@ -104,17 +127,19 @@ public class BoardMain {
 						break;
 
 					case 4: // 게시판 글 수정
-						System.out.println("-------------------------- 게시판 수정 ---------------------------");
+						System.out.println("╔═══════════════════════════════════════════════════════════════╗");
+						System.out.println("║                            Modify                             ║");
+						System.out.println("╚═══════════════════════════════════════════════════════════════╝");
 						System.out.print("수정하실 게시판 번호를 선택하세요 >> ");
 						int eno = Integer.parseInt(sc.nextLine());
 
-						System.out.print("제목   >> ");
+						System.out.print("Title     >> ");
 						title = sc.nextLine();
 
-						System.out.print("작성자  >> ");
+						System.out.print("Writer    >> ");
 						name = sc.nextLine();
 
-						System.out.print("내용   >> ");
+						System.out.print("Content   >> ");
 						content = sc.nextLine();
 
 						Board = new BoardGS();
@@ -124,25 +149,31 @@ public class BoardMain {
 						Board.setBrcontent(content);
 
 						if (dao.updateBoard(Board)) {
-							System.out.println("게시판 수정 완료.");
+							System.out.println("Modify Complete");
 							System.out.println("");
 						} else {
-							System.out.println("수정 오류입니다.");
+							System.out.println("Error");
 							System.out.println("");
 						}
 
 						break;
 
 					case 5: // 게시판 글 삭제 기능
-						System.out.println("------------------------- 게시판 삭제 --------------------------");
-						System.out.print("삭제하실 게시판 번호를 선택하세요 >> ");
+						System.out.println("╔═══════════════════════════════════════════════════════════════╗");
+						System.out.println("║                            Delete                             ║");
+						System.out.println("╚═══════════════════════════════════════════════════════════════╝");
+						System.out.print("Delete Number >> ");
 						eno = Integer.parseInt(sc.nextLine());
 
 						if (dao.deleteBoard(eno)) {
-							System.out.println("------------------- 글이 삭제 되었습니다 ( •̅_•̅ ) -------------------");
+							System.out.println("╔═══════════════════════════════════════════════════════════════╗");
+							System.out.println("║                       Delete Success                          ║");
+							System.out.println("╚═══════════════════════════════════════════════════════════════╝");
 							System.out.println("");
 						} else {
-							System.out.println("-------------------------- 삭제 실패 ----------------------------");
+							System.out.println("╔═══════════════════════════════════════════════════════════════╗");
+							System.out.println("║                        Delete Fail                            ║");
+							System.out.println("╚═══════════════════════════════════════════════════════════════╝");
 							System.out.println("");
 						}
 
@@ -150,15 +181,28 @@ public class BoardMain {
 
 						
 					case 6:
-						System.out.println("-------------------- 로그인화면으로 되돌아갑니다 ---------------------");
+						System.out.println("╔═══════════════════════════════════════════════════════════════╗");
+						System.out.println("║                        Login Return                           ║");
+						System.out.println("╚═══════════════════════════════════════════════════════════════╝");
 						System.out.println("");
 						run2 = false;	// 게시판화면만 종료하기
 						
 						break;
-						
+					
 					case 7:
 						System.out.println("");
-						System.out.println("------------------- 게시판 프로그램 종료 (ᐡᴗ ̫ ᴗᐡ) -------------------");
+						System.out.println(".　　　　　  ,-､　　　 　 　 　　        　..-､");
+						System.out.println("　　　　 ./:::::＼　　　　 　 　       ／:::::ヽ");
+						System.out.println("　　　　/::::::::::::;ゝ--──-- ､._/::::::::::ヽ");
+						System.out.println("　　　 /,.-‐''\"′ 　　　　　　　    　 ＼::::::::|");
+						System.out.println("　　 ／　 　　　　　　　　　　　                ヽ､::|");
+						System.out.println("　  /　　  　　●　　　 　 　 　 　          　 　 ヽ|");
+						System.out.println("  |　　        　､､､　　 　 　 　 　 　 ●　　    　 |");
+						System.out.println(" .|　　　 　　　　       (_人__丿　　  ､､､　 　    /");
+						System.out.println("  |　　　　　　　　　             　　　　　　　 　/");
+						System.out.println("　 `､　　　　　　　　 　 　 　　 　           　 /");
+						System.out.println("　　　`ｰ ､__　　　 　 　 　END         　　 .／");
+						System.out.println("　　　　  　　/`'''ｰ‐‐──‐─‐──‐┬---------／");
 						
 						run2 = false;
 						run = false;  // (게시판을 종료하면 로그인화면도 종료 해줘야함)
@@ -173,16 +217,16 @@ public class BoardMain {
 				
 				
 			case 2: // 회원가입					회원가입						회원가입
-				System.out.print("사용하실 ID를 입력하세요 : ");
+				System.out.print("ID             : ");
 				String id2 = sc.nextLine();
 
-				System.out.print("사용하실 PW를 입력하세요 : ");
+				System.out.print("Password       : ");
 				String pw2 = sc.nextLine();
 
-				System.out.print("이름을 입력하세요       : ");
+				System.out.print("Name           : ");
 				String name = sc.nextLine();
 
-				System.out.print("생년월일을 입력하세요    : ");
+				System.out.print("Date Of Birth  : ");
 				int birth = Integer.parseInt(sc.nextLine());
 
 			MemberGS members = new MemberGS();
@@ -192,10 +236,16 @@ public class BoardMain {
 			members.setMembirth(birth);
 
 			if(dao1.Members(members)){
-				System.out.println("----------------------- 회원가입 완료 ᴖ ᴈ ᴖ ----------------------");
+				System.out.println("╔═══════════════════════════════════════════════════════════════╗");
+				System.out.println("║                       Sign Success ᴖ ᴈ ᴖ                      ║");
+				System.out.println("╚═══════════════════════════════════════════════════════════════╝");
+				System.out.println("");
 				System.out.println("");
 			} else {
-				System.out.println("------------------- 회원가입 실패했어요 ̗̀(ꀬ⏖ꀬ∴) --------------------");
+
+				System.out.println("╔═══════════════════════════════════════════════════════════════╗");
+				System.out.println("║                　      Sign Fail  ̗̀(ꀬ⏖ꀬ∴)                      ║");
+				System.out.println("╚═══════════════════════════════════════════════════════════════╝");
 				System.out.println("");
 			}
 			break;
@@ -204,15 +254,17 @@ public class BoardMain {
 			case 3:		// 아이디 찾기					아이디 찾기					아이디 찾기
 				MemberGS idfind = new MemberGS();
 
-				System.out.println("------------------------ 아이디찾기 -----------------------------");
-				System.out.print("이름을 입력하세요     : ");
+				System.out.println("╔═══════════════════════════════════════════════════════════════╗");
+				System.out.println("║                           Find ID                             ║");
+				System.out.println("╚═══════════════════════════════════════════════════════════════╝");
+				System.out.print("Name           : ");
 				String name3 = sc.nextLine();
 
-				System.out.print("생년월일을 입력하세요  : ");
+				System.out.print("Date Of Birth  : ");
 				int birth3 = Integer.parseInt(sc.nextLine());
 
 				System.out.println("------------------------ Loding... ---------------------------");
-				System.out.print("ヾ(＾∇＾) 찾으시는 아이디는 ▶ ");
+				System.out.print("ヾ(＾∇＾) Your ID ▶ ");
 				
 				MemberGS findid = new MemberGS();
 				idfind.setMemname(name3);
@@ -227,17 +279,17 @@ public class BoardMain {
 
 			case 4:
 				MemberGS pwfind = new MemberGS();
-				System.out.print("ID를 입력하세요     : ");
+				System.out.print("ID             : ");
 				String id4 = sc.nextLine();
 
-				System.out.print("이름을 입력하세요     : ");
+				System.out.print("Name           : ");
 				String name4 = sc.nextLine();
 
-				System.out.print("생년월일을 입력하세요  : ");
+				System.out.print("Date Of Birth  : ");
 				int birth4 = Integer.parseInt(sc.nextLine());
 
 				System.out.println("------------------------ Loding.... --------------------------");
-				System.out.print("/ᐠ｡ꞈ｡ᐟ\\\\ 찾으시는 비밀번호는 ▶ ");
+				System.out.print("/ᐠ｡ꞈ｡ᐟ\\\\ Your PW ▶ ");
 		
 				MemberGS findpw = new MemberGS();
 				pwfind.setMemid(id4);
@@ -253,7 +305,19 @@ public class BoardMain {
 				break;
 
 			case 5:
-				System.out.println("------------------ 로그인 페이지 종료 (ᴗ˳ᴗ) ---------------------");
+				System.out.println(".　　　　　  ,-､　　　 　 　 　　        　..-､");
+				System.out.println("　　　　 ./:::::＼　　　　 　 　       ／:::::ヽ");
+				System.out.println("　　　　/::::::::::::;ゝ--──-- ､._/::::::::::ヽ");
+				System.out.println("　　　 /,.-‐''\"′ 　　　　　　　    　 ＼::::::::|");
+				System.out.println("　　 ／　 　　　　　　　　　　　                ヽ､::|");
+				System.out.println("　  /　　  　　●　　　 　 　 　 　          　 　 ヽ|");
+				System.out.println("  |　　        　､､､　　 　 　 　 　 　 ●　　    　 |");
+				System.out.println(" .|　　　 　　　　       (_人__丿　　  ､､､　 　    /");
+				System.out.println("  |　　　　　　　　　             　　　　　　　 　/");
+				System.out.println("　 `､　　　　　　　　 　 　 　　 　           　 /");
+				System.out.println("　　　`ｰ ､__　　　 　 　 　END         　　 .／");
+				System.out.println("　　　　  　　/`'''ｰ‐‐──‐─‐──‐┬---------／");
+
 				run = false;
 
 			}// 로그인 switch
@@ -262,3 +326,4 @@ public class BoardMain {
 
 	}// end
 }
+

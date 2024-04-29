@@ -17,7 +17,7 @@ public class BoardDao {
 	ResultSet rs;
 
 	private void getConn() {
-		String url = "jdbc:oracle:thin:@localhost:1521:xe";
+		String url = "jdbc:oracle:thin:@192.168.0.19:1521:xe";
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			conn = DriverManager.getConnection(url, "jsp", "jsp");
@@ -26,7 +26,7 @@ public class BoardDao {
 			return;
 		}
 	}
-
+	
 	
 	
 	// 게시판 등록 기능.			게시판 등록 기능.			게시판 등록 기능.
